@@ -44,7 +44,7 @@ struct CFGPass : public ModulePass {
     for (const Function& func : M.getFunctionList()) {
       if (func.isDeclaration())
         continue;
-      outs() << "## " << func.getName() << "\n\n";
+      outs() << "## `" << func.getName() << "`\n\n";
       outs() << "```mermaid\ngraph TD;\n";
       std::map<const BasicBlock*, int> bbids;
       int bbid = 0;
@@ -86,7 +86,7 @@ int main(int argc, char **argv) {
 
   cl::ParseCommandLineOptions(argc, argv, "CFGPass\nLLVM IR");
 
-  outs() << "# " << InputFilename.getValue() << "\n\n";
+  outs() << "# `" << InputFilename.getValue() << "`\n\n";
 
   std::unique_ptr<Module> M = parseIRFile(InputFilename, Err, Context);
   if (!M) {
