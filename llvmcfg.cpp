@@ -61,11 +61,11 @@ struct CFGPass : public ModulePass {
         const BasicBlock* bb = bfs_bb.front();
         bfs_bb.pop();
         for (const BasicBlock* succ: successors(bb)) {
+          outs() << "bb_" << bbids.at(bb) << "-->" << "bb_" << bbids.at(succ) << "\n";
           if (vis_bb.count(succ))
             continue;
           bfs_bb.push(succ);
           vis_bb.insert(succ);
-          outs() << "bb_" << bbids.at(bb) << "-->" << "bb_" << bbids.at(succ) << "\n";
         }
       }
       outs() << "```\n\n";
